@@ -8,6 +8,7 @@ void inicializar();
 void exibirQuantidadeElementos();
 void exibirElementos();
 void inserirElemento();
+void reinserirElemento();
 void excluirElemento();
 void buscarElemento();
 int posicaoElemento(int valor);
@@ -27,7 +28,7 @@ int main()
 void menu()
 {
 	int op = 0;
-	while (op != 7) {
+	while (op != 8) {
 		system("cls"); // somente no windows
 		cout << "Menu Lista Linear";
 		cout << endl << endl;
@@ -37,7 +38,8 @@ void menu()
 		cout << "4 - Buscar elemento \n";
 		cout << "5 - Inserir elemento \n";
 		cout << "6 - Excluir elemento \n";
-		cout << "7 - Sair \n\n";
+		cout << "7 - Reinserir elemento \n";
+		cout << "8 - Sair \n\n";
 
 		cout << "Opcao: ";
 		cin >> op;
@@ -56,8 +58,10 @@ void menu()
 			break;
 		case 6: excluirElemento();
 			break;
+		case 7: reinserirElemento();
+			break;
 
-		case 7:
+		case 8:
 			return;
 		default:
 			break;
@@ -122,7 +126,35 @@ void inserirElemento()
 
 void excluirElemento()
 {
+	int valor;
+	cout << "Digite o elemento que queira deletar: ";
+	cin >> valor;
+	int pos = posicaoElemento(valor);
 
+	if (pos != -1) {
+		for (pos; pos < nElementos; pos++) {
+			lista[pos] = lista[pos + 1];
+		}
+	}
+	else
+	{
+		cout << "O elemento digitado nao foi encontrado" << endl;
+	}
+}
+
+//atribui um novo valor a posição escolhida
+
+void reinserirElemento() {
+	int lugarElemento;
+	int numeroInserido;
+	int n = 0;
+
+	cout << "Digite a posição onde deseja inserir o valor: " << endl;
+	cin >> lugarElemento;
+	cout << "Digite o valor que deseja inserir" << endl;
+	cin >> numeroInserido;
+	
+	lista[lugarElemento] = numeroInserido;
 
 }
 
@@ -152,3 +184,4 @@ int posicaoElemento(int busca)
 	}
 	return posicao;
 }
+
